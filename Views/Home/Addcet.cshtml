@@ -1,0 +1,100 @@
+﻿@model Test.Models.Category
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Category</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+            input[type="text"]:focus {
+                border-color: #007bff;
+                outline: none;
+            }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        .text-muted {
+            font-size: 0.875rem;
+            color: #6c757d;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add Category</h2>
+        @using (Html.BeginForm("Addcet", "Home", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.HiddenFor(x => x.CId)
+                @Html.LabelFor(x => x.CName, "Category Name")
+                @Html.TextBoxFor(x => x.CName, new { @placeholder = "Enter category name" })
+            </div>
+            <input type="submit" value="Add" />
+        }
+        <p class="text-muted">Enter a category name to add it to the database.</p>
+    </div>
+</body>
+</html>

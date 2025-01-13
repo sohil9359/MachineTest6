@@ -1,0 +1,116 @@
+﻿@model IEnumerable<Test.Models.Product>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+            table th, table td {
+                border: 1px solid #ddd;
+                padding: 10px;
+                text-align: left;
+            }
+
+            table th {
+                background-color: #f4f4f4;
+                font-weight: bold;
+            }
+
+            table tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            table tr:hover {
+                background-color: #f1f1f1;
+            }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            margin-top: 20px;
+        }
+
+            .pagination a {
+                display: inline-block;
+                padding: 8px 12px;
+                font-size: 14px;
+                color: #007bff;
+                text-decoration: none;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                background-color: #f9f9f9;
+            }
+
+                .pagination a:hover {
+                    background-color: #007bff;
+                    color: #fff;
+                }
+
+                .pagination a.active {
+                    background-color: #007bff;
+                    color: #fff;
+                    border: 1px solid #007bff;
+                }
+    </style>
+</head>
+<body>
+    <h2>Product List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Id</th>
+                <th>Product Name</th>
+                <th>Category Id</th>
+                <th>Category Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in ViewBag.Products)
+            {
+                <tr>
+                    <td>@p.PId</td>
+                    <td>@p.PName</td>
+                    <td>@p.CatId</td>
+                    <td>@p.Category.CName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="pagination">
+
+        @if (ViewBag.CurrentPage > 1)
+        {
+            <a href="@Url.Action("Display", new { page = ViewBag.CurrentPage - 1 })">Previous</a>
+        }
+
+
+        @for (int i = 1; i <= ViewBag.TotalPages; i++)
+        {
+            <a href="@Url.Action("Display", new { page = i })" class="@(i == ViewBag.CurrentPage ? "active" : "")">@i</a>
+        }
+
+
+        @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+        {
+            <a href="@Url.Action("Display", new { page = ViewBag.CurrentPage + 1 })">Next</a>
+        }
+    </div>
+</body>
+</html>

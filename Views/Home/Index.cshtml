@@ -1,0 +1,73 @@
+﻿@model Test.Models.Product
+
+@{
+    ViewBag.Title = "Add Product";
+}
+
+<div class="container mt-5">
+    <h2 class="text-primary mb-4">Add Product</h2>
+
+    <div class="mb-4">
+        <a href="@Url.Action("Addcet", "Home")" class="btn btn-success me-2">Add Category</a>
+        <a href="@Url.Action("Display", "Home")" class="btn btn-info">View Products</a>
+    </div>
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form" }))
+    {
+        <div class="mb-3">
+            @Html.LabelFor(model => model.PName, "Product Name", new { @class = "form-label" })
+            @Html.TextBoxFor(model => model.PName, new { @class = "form-control", placeholder = "Enter product name", required = "required" })
+            <small class="text-muted">Provide the name of the product.</small>
+        </div>
+
+        <div class="mb-3">
+            @Html.LabelFor(model => model.CatId, "Category", new { @class = "form-label" })
+            @Html.DropDownListFor(
+                     x => x.CatId,
+                     (SelectList)ViewBag.Categouries,
+                     "Select a Category",
+                     new { @class = "form-select", required = "required" }
+                 )
+            <small class="text-muted">Choose a category for the product.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Product</button>
+    }
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        max-width: 600px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    .btn {
+        text-transform: uppercase;
+        font-size: 0.875rem;
+        padding: 8px 16px;
+    }
+
+    .form-label {
+        font-weight: bold;
+    }
+
+    .form-control, .form-select {
+        border-radius: 4px;
+    }
+
+    small.text-muted {
+        font-style: italic;
+
+    }
+</style>
